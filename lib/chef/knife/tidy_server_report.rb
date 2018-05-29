@@ -93,6 +93,9 @@ class Chef
           tidy.write_new_file(version_count, ::File.join(tidy.reports_dir, "#{org}_cookbook_count.json"), backup=false)
           tidy.write_new_file(stale_nodes_hash, ::File.join(tidy.reports_dir, "#{org}_stale_nodes.json"), backup=false)
 
+          # EI: write the used_cookbooks to a file too  milo 20180529
+          tidy.write_new_file(used_cookbooks, ::File.join(tidy.reports_dir, "#{org}_used_cookbooks.json"), backup=false)
+
           if pre_12_3_nodes.length > 0
             pre_12_3_message = "#{pre_12_3_nodes.length} nodes in organization #{org} have converged in the last #{node_threshold} days with a chef-client < 12.3. These nodes' cookbook versions WILL NOT be factored in the stale cookbooks versions report. Continuing with the server cleanup will delete cookbooks in-use by these nodes."
             ui.warn(pre_12_3_message)
